@@ -2,6 +2,9 @@
 
 > Base Frontend desarrollado con el framework Vue.js
 
+![muestra admin módulos](documentation/images/sample-módulos.png "panel administración")
+![muestra login](documentation/images/sample-login.png "pantalla login")
+
 ## Técnologias empleadas
 - Vue.js como Framework principal. [Sitio oficial](https://vuejs.org/) o en [español](https://es-vuejs.github.io/vuejs.org/)
 - Vue-router para el manejo de rutas. [Documentación oficial](https://router.vuejs.org/)
@@ -73,3 +76,6 @@ La elección de `Vuetify` fue debido a que esta ya tiene la mayoría de los comp
 Para instalar la aplicación se recomienda revisar el siguiente enlace:
 
 > [INSTALL.md](INSTALL.md)
+
+## Sobre el proyecto
+  - Licencia: [LPG-Bolivia v1.0](LICENCIA.md)
