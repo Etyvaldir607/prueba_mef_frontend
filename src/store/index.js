@@ -22,6 +22,7 @@ export default new Vuex.Store({
     permissions: {},
     rol: '',
     sidenav: false,
+    logsType: '',
     state403: false,
     modal: false,
     modal2: false,
@@ -66,6 +67,9 @@ export default new Vuex.Store({
     },
     setSidenav (state, value) {
       state.sidenav = value;
+    },
+    setLogsType (state, value) {
+      state.logsType = value;
     },
     setPermissions (state, value) {
       state.permissions = value;
@@ -129,6 +133,7 @@ export default new Vuex.Store({
       state.user = {};
       state.date = {};
       state.permissions = {};
+      state.logsType = '';
       state.rol = '';
       state.layout.breadcrumbs = {};
       state.modal = false;

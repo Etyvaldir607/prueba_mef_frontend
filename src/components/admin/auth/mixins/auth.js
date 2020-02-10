@@ -17,16 +17,18 @@ export default {
           let token = response.data.token;
           let redirect = response.data.redirect;
           let sidenav = data.sidenav === undefined ? true : data.sidenav;
-
+          let logsType = response.data.logsType === undefined ? '' : response.data.logsType;
           this.$storage.setUser(usuario);
           this.$storage.set('menu', menu);
           this.$storage.set('token', token);
           this.$storage.set('sidenav', sidenav);
+          this.$storage.set('logsType', logsType);
           this.$storage.set('permissions', permisos);
 
           this.$store.commit('setUser', usuario);
           this.$store.commit('setMenu', menu);
           this.$store.commit('setSidenav', sidenav);
+          this.$store.commit('setLogsType', logsType);
           this.$store.commit('setPermissions', permisos);
           this.$store.commit('setAuth', true);
           this.$storage.remove('oauth2_state');

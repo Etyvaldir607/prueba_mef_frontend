@@ -43,10 +43,18 @@ import crud from '@/common/util/crud-table/mixins/crud-table';
 
 export default {
   mixins: [ crud ],
+  mounted () {
+    this.logsType = this.$storage.get('logsType');
+    // cambio de comportamiento
+    if (this.logsType === 'filesystem') {
+      // consumiendo endpoint para logs en sistema de archivos
+    }
+  },
   data () {
     return {
       graphql: true,
       url: 'logs',
+      logsType: '',
       headers: [
         { text: this.$t('log.crud.nivel'), value: 'nivel' },
         { text: this.$t('log.crud.tipo'), value: 'tipo' },
