@@ -36,7 +36,13 @@ $ cd base-frontend
 $ git branch
 ```
 
-4. Instalar las dependencias de paquetes npm
+4. Verificar que la versión de node es igual o superior a 6.0.0
+
+```sh
+$ node -v
+```
+
+5. Instalar las dependencias de paquetes npm
 
 ```sh
 $ npm install
