@@ -15,3 +15,8 @@ config/*.js
 *.ntvs*
 *.njsproj
 *.sln
+
+## temporales creados por emacs
+*~
+\#*\#
+.\#*
