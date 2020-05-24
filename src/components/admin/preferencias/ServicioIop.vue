@@ -22,14 +22,11 @@
 
           <template slot="form">
             <v-card-title class="headline">
-              <v-flex xs10>
-                <v-icon>business</v-icon> {{ form.id ? $t('servicioIop.crud.editServicio') :  $t('servicioIop.crud.addServicio') }}
-              </v-flex>
-              <v-flex xs2 text-md-right>
-                <v-btn icon @click.native="$store.commit('closeModal')">
-                  <v-icon>close</v-icon>
-                </v-btn>
-              </v-flex>
+              <v-icon>business</v-icon> {{ form.id ? $t('servicioIop.crud.editServicio') :  $t('servicioIop.crud.addServicio') }}
+              <v-spacer />
+              <v-btn icon @click.native="$store.commit('closeModal')">
+                <v-icon>close</v-icon>
+              </v-btn>
             </v-card-title>
             <v-form
               @submit.prevent="save"
@@ -132,7 +129,7 @@
                 <v-btn
                   icon
                   slot="activator"
-                  @click.native="editItem(items.item.id, 'servicioIop', dataGraphql)">
+                  @click.native="editItem(parseInt(items.item.id), 'servicioIop', dataGraphql)">
                   <v-icon>edit</v-icon>
                 </v-btn>
                 <span>Editar registro</span>
@@ -141,7 +138,7 @@
                 <v-btn
                   icon
                   slot="activator"
-                  @click.native="deleteItem(items.item.id, 'servicioIop')">
+                  @click.native="deleteItem(parseInt(items.item.id), 'servicioIop', 'btn-refresh-iop')">
                   <v-icon color="red">delete</v-icon>
                 </v-btn>
                 <span>Eliminar registro</span>
@@ -152,7 +149,7 @@
                 <v-switch
                   v-model="items.item.active"
                   value="ACTIVE"
-                  @change="changeActive(items.item, items.item.id, 'servicioIop', 'EditServicioIop')"
+                  @change="changeActive(items.item, parseInt(items.item.id), 'servicioIop', 'EditServicioIop', 'btn-refresh-iop')"
                   hide-details
                   slot="activator"
                   color="success"></v-switch>
@@ -318,14 +315,14 @@ export default {
           delete data.id;
           this.$service.graphql({
             query: `
-              mutation edit($id: ID!, $servicio: EditServicioIop!) {
+              mutation edit($id: Int!, $servicio: EditServicioIop!) {
                 servicioIopEdit(id: $id, servicioIop: $servicio) {
                   id
                 }
               }
             `,
             variables: {
-              id: this.form.id,
+              id: parseInt(this.form.id),
               servicio: data
             }
           }).then(response => {

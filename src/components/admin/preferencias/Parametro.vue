@@ -12,7 +12,7 @@
           <template slot="buttons">
             <v-tooltip bottom v-if="$store.state.permissions['parametros:create']">
              <v-btn color="primary" dark
-               @click.native.stop="openModal()"
+               @click.stop="openModal()"
                slot="activator"
              ><v-icon dark>add</v-icon> {{$t('common.add') }}</v-btn>
              <span>{{$t('parametro.add')}}</span>
@@ -21,14 +21,11 @@
 
           <template slot="form">
             <v-card-title class="headline">
-              <v-flex xs10>
-                <v-icon>business</v-icon> {{ form.id ? $t('parametro.crud.editParametro') :  $t('parametro.crud.addParametro') }}
-              </v-flex>
-              <v-flex xs2 text-md-right>
-                <v-btn icon @click.native="$store.commit('closeModal')">
-                  <v-icon>close</v-icon>
-                </v-btn>
-              </v-flex>
+              <v-icon>business</v-icon> {{ form.id ? $t('parametro.crud.editParametro') :  $t('parametro.crud.addParametro') }}
+              <v-spacer />
+              <v-btn icon @click="$store.commit('closeModal')">
+                <v-icon>close</v-icon>
+              </v-btn>
             </v-card-title>
             <v-form
               @submit.prevent="save"
@@ -86,7 +83,7 @@
                 <small class="error--text text-required">* Los campos son obligatorios</small>
                 <v-spacer></v-spacer>
                 <v-btn
-                  @click.native="$store.commit('closeModal');">
+                  @click="$store.commit('closeModal');">
                   <v-icon>cancel</v-icon> {{$t('common.cancel') }}
                 </v-btn>
                 <v-btn
@@ -105,7 +102,7 @@
                 <v-btn
                   icon
                   slot="activator"
-                  @click.native="editItem(items.item.id, 'parametro', dataGraphql)">
+                  @click="editItem(parseInt(items.item.id), 'parametro', dataGraphql)">
                   <v-icon>edit</v-icon>
                 </v-btn>
                 <span>Editar registro</span>
@@ -114,7 +111,7 @@
                 <v-btn
                   icon
                   slot="activator"
-                  @click.native="deleteItem(items.item.id, 'parametro')">
+                  @click="deleteItem(parseInt(items.item.id), 'parametro')">
                   <v-icon color="red">delete</v-icon>
                 </v-btn>
                 <span>Eliminar registro</span>
@@ -220,14 +217,14 @@ export default {
           delete data.id;
           this.$service.graphql({
             query: `
-              mutation edit($id: ID!, $parametro: EditParametro!) {
+              mutation edit($id: Int!, $parametro: EditParametro!) {
                 parametroEdit(id: $id, parametro: $parametro) {
                   id
                 }
               }
             `,
             variables: {
-              id: this.form.id,
+              id: parseInt(this.form.id),
               parametro: data
             }
           }).then(response => {
