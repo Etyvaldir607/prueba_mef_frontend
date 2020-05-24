@@ -377,6 +377,7 @@ export default {
           delete data.id_modulo;
         }
         data.visible = !!data.visible;
+        data.orden = parseInt(data.orden);
 
         if (data.id) {
           delete data.id;
@@ -491,11 +492,9 @@ export default {
       }, () => (obj.visible = !visible));
     },
     getModulo (id) {
-      for (let i in this.modulos) {
-        if (id) {
-          if (parseInt(this.modulos[i].value) === id) {
-            return this.modulos[i].text;
-          }
+      for (let item of this.modulos) {
+        if (id && item.value === id) {
+          return item.text;
         }
       }
       return '';
