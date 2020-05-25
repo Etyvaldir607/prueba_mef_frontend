@@ -1,10 +1,13 @@
+const typesID = ['parametro', 'servicioIop'];
+
 export default {
   methods: {
-    editItem (id, url, fields = 'id', form = true) {
+    editItem (id, url = '', fields = 'id', form = true) {
+      const typeID = typesID.indexOf(url) !== -1 ? 'Int!' : 'ID!';
       if (this.graphql) {
         this.$service.graphql({
           query: `
-            query get($id: ID!) {
+            query get($id: ${typeID}) {
               ${url}(id: $id) {
                 ${fields}
               }
@@ -26,12 +29,13 @@ export default {
       }
     },
 
-    deleteItem (id, url) {
+    deleteItem (id, url = '', idList = 'btn-refresh-list') {
       this.$confirm('¿Quiere eliminar el registro?', () => {
+        const typeID = typesID.indexOf(url) !== -1 ? 'Int!' : 'ID!';
         if (this.graphql) {
           this.$service.graphql({
             query: `
-              mutation remove($id: ID!) {
+              mutation remove($id: ${typeID}) {
                 ${url}Delete(id: $id) {
                   deleted
                 }
@@ -41,26 +45,27 @@ export default {
           }).then(response => {
             if (response && response[url + 'Delete'] && response[url + 'Delete'].deleted) {
               this.$message.success('¡Registro eliminado correctamente!');
-              this.updateList();
+              this.updateList(idList);
             }
           });
         } else {
           this.$service.delete(url || this.url, id)
             .then(response => {
               this.$message.success('¡Registro eliminado correctamente!');
-              this.updateList();
+              this.updateList(idList);
             });
         }
       });
     },
 
-    changeActive (obj, id, url, type, callback, method = 'Edit') {
+    changeActive (obj, id, url, type, callback, method = 'Edit', idList = 'btn-refresh-list') {
       let active = obj.active === 'ACTIVE';
       this.$confirm(`¿Está seguro de ${active ? 'activar' : 'desactivar'} el registro?.`, () => {
         if (this.graphql) {
+          const typeID = typesID.indexOf(url) !== -1 ? 'Int!' : 'ID!';
           this.$service.graphql({
             query: `
-              mutation edit($id: ID!, $${url}: ${type}!) {
+              mutation edit($id: ${typeID}, $${url}: ${type}!) {
                 ${url}${method}(id: $id, ${url}: $${url}) {
                   id
                 }
@@ -79,7 +84,7 @@ export default {
               } else {
                 this.$message.warning(`¡Registro desactivado!`, null, { timeout: 2000 });
               }
-              this.updateList();
+              this.updateList(idList);
               if (typeof callback === 'function') {
                 callback();
               }
@@ -94,7 +99,7 @@ export default {
                 } else {
                   this.$message.warning(`¡Registro desactivado!`, null, { timeout: 2000 });
                 }
-                this.updateList();
+                this.updateList(idList);
                 if (typeof callback === 'function') {
                   callback();
                 }
