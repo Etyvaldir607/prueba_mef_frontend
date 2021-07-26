@@ -6,5 +6,6 @@ export default {
   roles: 'Roles',
   parametros: 'Preferencias',
   logs: 'Logs del sistema',
-  config: 'Configuraciones'
+  config: 'Configuraciones',
+  tasks: 'Tareas'
 };

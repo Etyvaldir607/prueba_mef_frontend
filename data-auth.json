@@ -24,6 +24,10 @@
                 {
                     "url": "logs",
                     "label": "Logs del sistema"
+                },
+                {
+                    "url": "tareas",
+                    "label": "Tareas"
                 }
             ]
         }
@@ -69,7 +73,12 @@
         "serviciosIop:read": true,
         "serviciosIop:create": true,
         "serviciosIop:update": true,
-        "serviciosIop:delete": true
+        "serviciosIop:delete": true,
+
+        "tasks:read": true,
+        "tasks:create": true,
+        "tasks:update": true,
+        "tasks:delete": true
     },
     "usuario": {
         "usuario": "admin",

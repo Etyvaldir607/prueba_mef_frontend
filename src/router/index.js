@@ -15,6 +15,8 @@ import Usuario from '@/components/admin/usuario/Usuario';
 import Modulo from '@/components/admin/modulo/Modulo';
 import Preferencias from '@/components/admin/preferencias/Preferencias';
 import Log from '@/components/admin/Log';
+/** import component */
+import Tarea from '@/components/admin/tarea/Tarea';
 
 Vue.use(Router);
 
@@ -85,6 +87,12 @@ export default new Router({
     {
       path: '*',
       component: AppNotFound
+    },
+    /** define route */
+    {
+      path: '/tareas',
+      name: 'Tarea',
+      component: Tarea
     }
   ]
 });

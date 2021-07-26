@@ -163,5 +163,19 @@ export default {
       editServicio: 'Editar Servicio Iop',
       addServicio: 'Agregar Servicio Iop'
     }
+  },
+  task: {
+    title: 'Tareas',
+    add: 'Agregar nueva Tarea',
+    crud: {
+      edit: 'Editar',
+      name: 'Nombre',
+      dateDo: 'Fecha de realización',
+      timeDo: 'Hora de realización',
+      description: 'Descripción',
+      status: 'Estado',
+      addEnt: 'Agregar tarea',
+      editEnt: 'Editar tarea'
+    }
   }
 };
